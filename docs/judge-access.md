@@ -36,13 +36,7 @@ The user's USD 20 monthly project spend limit remains in force. This package
 does not claim an exact cost estimate or guarantee availability if that limit
 pauses the project. These checks demonstrate the synthetic smoke workflow, not production reliability.
 
-## Known gap: Dictate button not yet deployed here
-
-The Dictate (speech-to-text) button shown in the demo video and available in the
-local app is not yet present on this deployed judge sandbox: the deployed package
-predates that feature and has not been rebuilt and redeployed since. Typing and
-pasting a message work identically to local; only the microphone/dictation entry
-path is unavailable here. Redeploying only requires repackaging
-(`scripts/package_judge.py`) and updating the Lambda function code; it was not
-done before submission because of an unrelated, temporary AWS account
-verification hold on this account at the time.
+The Dictate (speech-to-text) button shown in the demo video is also live here:
+the deployed package was rebuilt and redeployed on 2026-09-14 (`aws lambda
+update-function-code`) after the feature was added, and a remote Chromium
+check confirmed the button renders and toggles with no JavaScript errors.

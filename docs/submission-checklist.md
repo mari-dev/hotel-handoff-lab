@@ -26,9 +26,9 @@ Deadline: September 15 at 02:00 CEST. Target: Professional Agents.
   not establish that requirement. The protected AWS demo passed a remote live HTTP workflow. The deployed browser login, assets and polling also passed; see judge-access.md.
 - Review the complete entry and authorize its final submission.
 
-MIT LICENSE applied and AWS deployment completed. The repository is not yet
-public — the entrant is reviewing it before flipping visibility. Video upload
-and Devpost submission have not been performed.
+MIT LICENSE applied. AWS deployment completed and redeployed on 2026-09-14 to
+include the Dictate button; the repository is public. Video upload and Devpost
+submission have not been performed.
 The project uses synthetic data. AI coding assistance was used, directed by
 the entrant's own prompts; this is a standalone, autonomous project with no
 copied source code.
