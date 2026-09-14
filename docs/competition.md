@@ -1,7 +1,5 @@
 # Contest delivery plan
 
-> **Status: not yet manually reviewed.** Written by an agent; awaiting human review.
-
 Source checked 2026-09-13: https://agentsforhumans.devpost.com/rules
 
 Target: Professional Agents. Deadline: September 15, 2026, 02:00 Europe/Berlin

@@ -1,7 +1,5 @@
 # Hotel Handoff Lab
 
-> **Status: not yet manually reviewed.** Written by an agent; awaiting human review.
-
 A local prototype for invoice requests that get lost between hotel shifts.
 Built during a hackathon sprint (Agents for Humans, September 2026), with AI
 coding assistance directed by the entrant's own prompts and hospitality
@@ -85,7 +83,6 @@ temporary; see [judge access](docs/judge-access.md).
 
 Original application code is licensed under MIT; third-party components retain
 their own licenses. See LICENSE and docs/dependency-licenses.md.
-This prototype is not a completed contest entry.
 
 ## Interface languages
 

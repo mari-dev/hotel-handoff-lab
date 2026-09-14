@@ -1,6 +1,5 @@
 # Devpost entry — Hotel Handoff Lab
 
-> **Status: not yet manually reviewed.** Written by an agent; awaiting human review.
 > Ready-to-paste draft. Public video URL and final Devpost review remain outstanding.
 
 ## Project name

@@ -1,7 +1,5 @@
 # Reuse assessment
 
-> **Status: not yet manually reviewed.** Written by an agent; awaiting human review.
-
 This is a newly created, standalone hotel project, built autonomously during
 the submission period. No source code, datasets, or prose have been copied
 from any other repository.

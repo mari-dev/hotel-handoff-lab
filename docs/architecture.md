@@ -1,7 +1,5 @@
 # Architecture
 
-> **Status: not yet manually reviewed.** Written by an agent; awaiting human review.
-
 ![Architecture](architecture.svg)
 
 ```text

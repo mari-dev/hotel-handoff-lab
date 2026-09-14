@@ -1,7 +1,5 @@
 # Submission readiness — 2026-09-14
 
-> **Status: not yet manually reviewed.** Written by an agent; awaiting human review.
-
 Official source: https://agentsforhumans.devpost.com/rules (checked 2026-09-14).
 Deadline: September 15 at 02:00 CEST. Target: Professional Agents.
 

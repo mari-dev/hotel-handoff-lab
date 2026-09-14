@@ -1,7 +1,5 @@
 # Dependency license inventory — 2026-09-13
 
-> **Status: not yet manually reviewed.** Agent-generated package metadata inventory; awaiting human review.
-
 These are unmodified dependencies from the locked Python environment. Original license files remain inside their distributions and in the judge ZIP. No dependency is relicensed as project code. Metadata alone is not a legal audit.
 
 | Distribution | Version | Declared license |

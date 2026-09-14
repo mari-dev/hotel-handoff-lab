@@ -1,7 +1,5 @@
 # Judge access — deployed 2026-09-14
 
-> **Status: not yet manually reviewed.** Written by an agent; awaiting human review.
-
 Implementation: `judge_lambda.py`, `infra/judge-demo.yaml`.
 Deployed in eu-north-1. Demo: https://whaottbycymae2xz24quiol5l40rogle.lambda-url.eu-north-1.on.aws
 
