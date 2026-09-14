@@ -49,11 +49,14 @@ The local app now uses password-protected accounts, expiring server-side session
 ## Built with
 Python; Strands Agents SDK; Amazon Bedrock; Amazon Nova Lite; Pydantic; SQLite; pypdf; JavaScript; i18next.
 
+More about me: [mari-dev.github.io](https://mari-dev.github.io/)
+
 ## Development and reuse disclosure
 AI coding assistance was used, directed throughout by the entrant's own prompts and decisions: the problem framing, the persona, the use cases and every acceptance criterion came from the entrant's lived front-of-house/reception experience, not from the model. The AI wrote code under that direction and did not originate the problem being solved. This is a standalone, autonomous project, built entirely during the submission period; no external source code or datasets were copied. Third-party packages and vendored i18next retain their own licenses; see docs/reuse.md and docs/dependency-licenses.md. No unsupported time-saving or originality claims are made.
 
 ## Attachments to complete before submitting
 - Public MIT repository: https://github.com/mari-dev/hotel-handoff-lab
+- Portfolio: https://mari-dev.github.io/
 - Public YouTube/Vimeo video URL, no more than five minutes.
 - Architecture diagram: docs/architecture.svg.
 - Working judge demo: https://whaottbycymae2xz24quiol5l40rogle.lambda-url.eu-north-1.on.aws
