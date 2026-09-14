@@ -1,1 +1,132 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="880" viewBox="0 0 1200 880"><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10" fill="#526f64"/></marker></defs><rect width="1200" height="880" fill="#f4f6ef"/><g font-family="Arial,sans-serif" fill="#193b32"><text x="60" y="62" font-size="30" font-weight="bold">Hotel Handoff Lab</text><text x="60" y="97" font-size="18">Source-backed intake. Human-confirmed work. Independent document evidence.</text><rect x="60" y="140" width="320" height="105" rx="14" fill="#ffffff" stroke="#b7c5b4"/><text x="80" y="172" font-size="20" font-weight="bold">Synthetic guest message</text><text x="80" y="201" font-size="16">English / German / Italian</text><rect x="440" y="140" width="700" height="155" rx="14" fill="#ffffff" stroke="#b7c5b4"/><text x="460" y="172" font-size="20" font-weight="bold">Strands + regional Bedrock Nova Lite</text><text x="460" y="201" font-size="16">read_request_message → find_existing_requests</text><text x="460" y="225" font-size="16">Literal string output; bounded agent turns</text><text x="460" y="249" font-size="16">No record writes or external actions</text><path d="M380,193 L435,193" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="440" y="340" width="700" height="115" rx="14" fill="#ffffff" stroke="#b7c5b4"/><text x="460" y="372" font-size="20" font-weight="bold">Independent intake checks</text><text x="460" y="401" font-size="16">Literal source support + conservative demand check</text><text x="460" y="425" font-size="16">Tool execution required; errors return inside the agent loop</text><path d="M790,295 L790,335" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="60" y="340" width="320" height="115" rx="14" fill="#ffffff" stroke="#b7c5b4"/><text x="80" y="372" font-size="20" font-weight="bold">Staff review and confirmation</text><text x="80" y="401" font-size="16">Source quotes shown in browser</text><text x="80" y="425" font-size="16">Missing details remain empty</text><path d="M440,400 L385,400" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="60" y="505" width="320" height="130" rx="14" fill="#ffffff" stroke="#b7c5b4"/><text x="80" y="537" font-size="20" font-weight="bold">SQLite invoice queue</text><text x="80" y="566" font-size="16">Explicit creation → atomic claim</text><text x="80" y="590" font-size="16">Operator opens Lexware link</text><text x="80" y="614" font-size="16">No automatic accounting action</text><path d="M220,455 L220,500" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="440" y="505" width="700" height="130" rx="14" fill="#ffffff" stroke="#b7c5b4"/><text x="460" y="537" font-size="20" font-weight="bold">Independent file evidence monitor</text><text x="460" y="566" font-size="16">Text PDF: unique guest + stay → prepared</text><text x="460" y="590" font-size="16">Exported Sent EML: identical PDF hash → sent</text><text x="460" y="614" font-size="16">Ambiguous or unmatched evidence stays unresolved</text><path d="M380,570 L435,570" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/><rect x="60" y="685" width="1080" height="125" rx="14" fill="#e5eddf" stroke="#b7c5b4"/><text x="80" y="717" font-size="20" font-weight="bold">Boundaries</text><text x="80" y="746" font-size="16">Synthetic prototype; literal checks are not a complete semantic guarantee.</text><text x="80" y="770" font-size="16">Sent-folder import is a trusted convention, not proof of delivery. No email is sent.</text><text x="80" y="794" font-size="16">Deployed judge host: password-protected Lambda sandbox; temporary data can reset.</text><text x="60" y="850" font-size="14">Agent-authored diagram · awaiting human review · 2026-09-14</text></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="900" viewBox="0 0 1320 900">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10" fill="#526f64"/>
+  </marker>
+  <marker id="arrowW" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10" fill="#7a5514"/>
+  </marker>
+</defs>
+<rect width="1320" height="900" fill="#f4f6ef"/>
+<g font-family="Arial,sans-serif">
+  <text x="50" y="46" font-size="28" font-weight="bold" fill="#193b32">Hotel Handoff Lab — Architecture</text>
+  <text x="50" y="70" font-size="15" fill="#3e534c">Local prototype (top) and the deployed AWS judge sandbox (bottom).</text>
+
+  <!-- ===== Zone: local machine ===== -->
+  <rect x="30" y="92" width="1260" height="330" rx="16" fill="#ffffff" stroke="#cfd9cb" stroke-width="1.5"/>
+  <text x="50" y="118" font-size="14" font-weight="bold" fill="#6d8079" letter-spacing="1">YOUR DEVICE — LOCAL PROTOTYPE (LOOPBACK HTTP)</text>
+
+  <!-- Browser -->
+  <rect x="55" y="140" width="210" height="110" rx="12" fill="#eef2ea" stroke="#b7c5b4"/>
+  <text x="72" y="168" font-size="16" font-weight="bold" fill="#193b32">Browser</text>
+  <text x="72" y="190" font-size="13" fill="#3e534c">Phone or computer</text>
+  <text x="72" y="208" font-size="13" fill="#3e534c">Signed-in session</text>
+  <text x="72" y="226" font-size="13" fill="#3e534c">EN / DE / IT UI</text>
+
+  <!-- Python server -->
+  <rect x="305" y="140" width="260" height="110" rx="12" fill="#ffffff" stroke="#b7c5b4"/>
+  <text x="322" y="168" font-size="16" font-weight="bold" fill="#193b32">Python HTTP server</text>
+  <text x="322" y="190" font-size="13" fill="#3e534c">Werkzeug session auth</text>
+  <text x="322" y="208" font-size="13" fill="#3e534c">Routes: intake, requests, evidence</text>
+  <text x="322" y="226" font-size="13" fill="#3e534c">server.py</text>
+
+  <!-- SQLite -->
+  <rect x="305" y="270" width="260" height="80" rx="12" fill="#eef2ea" stroke="#b7c5b4"/>
+  <text x="322" y="298" font-size="16" font-weight="bold" fill="#193b32">SQLite queue</text>
+  <text x="322" y="320" font-size="13" fill="#3e534c">Explicit create → atomic claim</text>
+  <text x="322" y="337" font-size="13" fill="#3e534c">No auto accounting action</text>
+
+  <!-- Strands agent -->
+  <rect x="605" y="140" width="290" height="110" rx="12" fill="#ffffff" stroke="#b7c5b4"/>
+  <text x="622" y="168" font-size="16" font-weight="bold" fill="#193b32">Strands agent</text>
+  <text x="622" y="190" font-size="13" fill="#3e534c">read_request_message</text>
+  <text x="622" y="208" font-size="13" fill="#3e534c">find_existing_requests (read-only)</text>
+  <text x="622" y="226" font-size="13" fill="#3e534c">Bounded turns; no writes</text>
+
+  <!-- Independent checks -->
+  <rect x="605" y="270" width="290" height="80" rx="12" fill="#eef2ea" stroke="#b7c5b4"/>
+  <text x="622" y="298" font-size="16" font-weight="bold" fill="#193b32">Independent intake checks</text>
+  <text x="622" y="320" font-size="13" fill="#3e534c">Literal source support</text>
+  <text x="622" y="337" font-size="13" fill="#3e534c">Conservative demand-quote gate</text>
+
+  <!-- File monitor -->
+  <rect x="945" y="140" width="320" height="110" rx="12" fill="#ffffff" stroke="#b7c5b4"/>
+  <text x="962" y="168" font-size="16" font-weight="bold" fill="#193b32">File evidence monitor</text>
+  <text x="962" y="190" font-size="13" fill="#3e534c">Deterministic, no model involved</text>
+  <text x="962" y="208" font-size="13" fill="#3e534c">PDF: guest+stay match → prepared</text>
+  <text x="962" y="226" font-size="13" fill="#3e534c">Sent EML: identical PDF → sent</text>
+
+  <!-- local folders -->
+  <rect x="945" y="270" width="320" height="80" rx="12" fill="#eef2ea" stroke="#b7c5b4"/>
+  <text x="962" y="298" font-size="16" font-weight="bold" fill="#193b32">Local folders</text>
+  <text x="962" y="320" font-size="13" fill="#3e534c">results/inbox/pdfs · results/inbox/sent</text>
+
+  <!-- AWS Bedrock external box (dashed, crosses boundary) -->
+  <rect x="605" y="388" width="290" height="0" fill="none"/>
+
+  <!-- arrows within local zone -->
+  <path d="M265,195 L300,195" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M565,195 L600,195" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M750,250 L750,265" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M435,250 L435,265" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M895,195 L940,195" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M1105,250 L1105,265" stroke="#526f64" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Bedrock call, crossing out of local zone -->
+  <path d="M750,140 L750,60" stroke="#805614" stroke-width="2" fill="none" stroke-dasharray="6,5" marker-end="url(#arrowW)"/>
+  <rect x="605" y="-4" width="0" height="0"/>
+</g>
+
+<!-- ===== Zone: AWS cloud (top-right floating box for Bedrock, drawn after so it sits above) ===== -->
+<g font-family="Arial,sans-serif">
+  <rect x="605" y="6" width="290" height="80" rx="12" fill="#fff3dc" stroke="#e0b23a" stroke-width="1.5"/>
+  <text x="622" y="30" font-size="15" font-weight="bold" fill="#7a5514">Amazon Bedrock</text>
+  <text x="622" y="50" font-size="13" fill="#7a5514">Nova Lite, regional (eu-north-1)</text>
+  <text x="622" y="68" font-size="13" fill="#7a5514">No cross-region inference</text>
+</g>
+
+<!-- ===== Zone: AWS judge deployment ===== -->
+<g font-family="Arial,sans-serif">
+  <rect x="30" y="440" width="1260" height="330" rx="16" fill="#f7f2e3" stroke="#e0c98a" stroke-width="1.5"/>
+  <text x="50" y="466" font-size="14" font-weight="bold" fill="#7a5514" letter-spacing="1">AWS — DEPLOYED JUDGE SANDBOX (eu-north-1)</text>
+
+  <rect x="55" y="488" width="230" height="100" rx="12" fill="#ffffff" stroke="#e0c98a"/>
+  <text x="72" y="514" font-size="15" font-weight="bold" fill="#193b32">Judge's browser</text>
+  <text x="72" y="536" font-size="13" fill="#3e534c">Public HTTPS URL</text>
+  <text x="72" y="554" font-size="13" fill="#3e534c">Same login/session flow</text>
+
+  <rect x="320" y="488" width="260" height="100" rx="12" fill="#ffffff" stroke="#e0c98a"/>
+  <text x="337" y="514" font-size="15" font-weight="bold" fill="#193b32">Lambda Function URL</text>
+  <text x="337" y="536" font-size="13" fill="#3e534c">judge_lambda.py adapter</text>
+  <text x="337" y="554" font-size="13" fill="#3e534c">Reserved concurrency: 1</text>
+  <text x="337" y="572" font-size="13" fill="#3e534c">Narrowly scoped execution role</text>
+
+  <rect x="615" y="488" width="250" height="100" rx="12" fill="#ffffff" stroke="#e0c98a"/>
+  <text x="632" y="514" font-size="15" font-weight="bold" fill="#193b32">Secrets Manager</text>
+  <text x="632" y="536" font-size="13" fill="#3e534c">Generated judge password</text>
+  <text x="632" y="554" font-size="13" fill="#3e534c">Never in repo or video</text>
+
+  <rect x="900" y="488" width="270" height="100" rx="12" fill="#ffffff" stroke="#e0c98a"/>
+  <text x="917" y="514" font-size="15" font-weight="bold" fill="#193b32">Encrypted S3 bucket</text>
+  <text x="917" y="536" font-size="13" fill="#3e534c">Private, holds the app ZIP</text>
+  <text x="917" y="554" font-size="13" fill="#3e534c">Deployed via CloudFormation</text>
+  <text x="917" y="572" font-size="13" fill="#3e534c">infra/judge-demo.yaml</text>
+
+  <rect x="55" y="618" width="1115" height="90" rx="12" fill="#ffffff" stroke="#e0c98a"/>
+  <text x="72" y="644" font-size="15" font-weight="bold" fill="#193b32">Same application code, same guarantees</text>
+  <text x="72" y="666" font-size="13" fill="#3e534c">Identical Strands agent, evidence monitor and auth layer as the local prototype above — this is a real deployment, not a mock.</text>
+  <text x="72" y="684" font-size="13" fill="#3e534c">No always-on compute, no NAT gateway, no AgentCore runtime, no cross-region inference. Log retention: 7 days.</text>
+
+  <path d="M285,538 L315,538" stroke="#7a5514" stroke-width="2" fill="none" marker-end="url(#arrowW)"/>
+  <path d="M580,538 L610,538" stroke="#7a5514" stroke-width="2" fill="none" marker-end="url(#arrowW)"/>
+  <path d="M865,538 L895,538" stroke="#7a5514" stroke-width="2" fill="none" marker-end="url(#arrowW)"/>
+  <path d="M450,588 L450,613" stroke="#7a5514" stroke-width="2" fill="none" marker-end="url(#arrowW)"/>
+</g>
+
+<g font-family="Arial,sans-serif">
+  <text x="50" y="800" font-size="14" font-weight="bold" fill="#193b32">Boundaries</text>
+  <text x="50" y="822" font-size="13" fill="#3e534c">Synthetic prototype; literal checks are not a complete semantic guarantee. Sent-folder import is a trusted convention, not proof of delivery.</text>
+  <text x="50" y="842" font-size="13" fill="#3e534c">No direct Lexware, Thunderbird or booking-system API integration. No email is sent by this application.</text>
+  <text x="50" y="874" font-size="12" fill="#8a9690">Hotel Handoff Lab · architecture diagram · 2026-09-14</text>
+</g>
+</svg>

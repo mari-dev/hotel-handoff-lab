@@ -34,4 +34,10 @@ Quotation validation proves literal occurrence, not semantic correctness.
 The monitor is deterministic and separate from AI. Sent-folder imports are a
 trusted convention, not delivery proof. No email is sent by the application.
 
+The deployed judge sandbox (eu-north-1) runs the identical application code
+behind a Lambda Function URL: `judge_lambda.py` adapts the same server, a
+generated password lives in Secrets Manager, and the app ZIP is stored in a
+private encrypted S3 bucket, all provisioned via `infra/judge-demo.yaml`. No
+always-on compute, NAT gateway, AgentCore runtime, or cross-region inference.
+
 The earlier general handoff CLI remains separate from the invoice application.
