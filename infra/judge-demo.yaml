@@ -1,0 +1,107 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Password-protected synthetic Hotel Handoff Lab judge sandbox in eu-north-1; temporary warm-instance storage, no always-on compute.
+Metadata:
+  AWSToolsMetrics:
+    AWSAgentToolkit: aws-cloudformation@2
+  com.aws.cloudformation.Context:
+    must: [Synthetic records only, Deploy only in eu-north-1, Keep reserved concurrency at one, No claim of durable shared production storage]
+Parameters:
+  ArtifactBucket:
+    Type: String
+    AllowedPattern: '[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]'
+    Description: Private build artifact bucket in eu-north-1.
+  ArtifactKey:
+    Type: String
+    AllowedPattern: '[A-Za-z0-9/_.-]+'
+    Description: Key of the reviewed Linux Python 3.13 ZIP bundle.
+Resources:
+  JudgePassword:
+    Type: AWS::SecretsManager::Secret
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Generated separate judge credential, never an AWS credential.
+        must: [Do not put password in outputs or source code]
+    Properties:
+      Description: Hotel Handoff Lab synthetic judge demo password
+      GenerateSecretString:
+        PasswordLength: 32
+        ExcludePunctuation: true
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Lambda service identity restricted to regional Nova Lite and its logs.
+        must: [No cross-region model permissions]
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: {Service: lambda.amazonaws.com}
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: RegionalInferenceAndLogs
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [bedrock:InvokeModel, bedrock:InvokeModelWithResponseStream]
+                Resource: !Sub 'arn:${AWS::Partition}:bedrock:eu-north-1::foundation-model/amazon.nova-lite-v1:0'
+              - Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !GetAtt DemoLogs.Arn
+  DemoLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${AWS::StackName}-demo'
+      RetentionInDays: 7
+  Demo:
+    Type: AWS::Lambda::Function
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Low-traffic private evaluation with no idle compute cost; SQLite is ephemeral demo state.
+        must: [One concurrent invocation, Do not treat local SQLite as durable shared storage, Invoice routes require an authenticated session; login assets are public]
+    Properties:
+      FunctionName: !Sub '${AWS::StackName}-demo'
+      Runtime: python3.13
+      Handler: judge_lambda.handler
+      Architectures: [x86_64]
+      Role: !GetAtt ExecutionRole.Arn
+      MemorySize: 512
+      Timeout: 120
+      ReservedConcurrentExecutions: 1
+      Code: {S3Bucket: !Ref ArtifactBucket, S3Key: !Ref ArtifactKey}
+      Environment:
+        Variables:
+          HANDOFF_MODEL_ID: amazon.nova-lite-v1:0
+          JUDGE_PASSWORD: !Sub '{{resolve:secretsmanager:${JudgePassword}:SecretString}}'
+  DemoUrl:
+    Type: AWS::Lambda::Url
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Browser HTTPS entrypoint with handler-level password protection.
+        must: [Do not bypass backend session authorization]
+    Properties:
+      TargetFunctionArn: !GetAtt Demo.Arn
+      AuthType: NONE
+  UrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref Demo
+      Action: lambda:InvokeFunctionUrl
+      Principal: '*'
+      FunctionUrlAuthType: NONE
+  InvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref Demo
+      Action: lambda:InvokeFunction
+      Principal: '*'
+      InvokedViaFunctionUrl: true
+Outputs:
+  JudgeUrl:
+    Description: HTTPS URL; requires separate judge password.
+    Value: !GetAtt DemoUrl.FunctionUrl
+  PasswordSecret:
+    Description: Retrieve privately and place only in private judge instructions.
+    Value: !Ref JudgePassword

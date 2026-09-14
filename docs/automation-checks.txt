@@ -1,0 +1,31 @@
+test_actual_pdf_then_email_closes_once (test_automation.AutomationTests.test_actual_pdf_then_email_closes_once) ... ok
+test_ambiguous_requests_do_not_auto_match (test_automation.AutomationTests.test_ambiguous_requests_do_not_auto_match) ... ok
+test_bad_pdf_requires_review (test_automation.AutomationTests.test_bad_pdf_requires_review) ... invalid pdf header: b'not a'
+EOF marker not found
+ok
+test_different_attachment_does_not_mark_sent (test_automation.AutomationTests.test_different_attachment_does_not_mark_sent) ... ok
+test_email_before_pdf_reconciles_later (test_automation.AutomationTests.test_email_before_pdf_reconciles_later) ... ok
+test_fabricated_model_field_is_rejected (test_automation.AutomationTests.test_fabricated_model_field_is_rejected) ... ok
+test_missing_invoice_demand_is_not_created (test_automation.AutomationTests.test_missing_invoice_demand_is_not_created) ... ok
+test_same_name_different_stay_does_not_match (test_automation.AutomationTests.test_same_name_different_stay_does_not_match) ... ok
+test_blank_quote_is_rejected (test_evidence.EvidenceTests.test_blank_quote_is_rejected) ... ok
+test_empty_evidence_is_rejected (test_evidence.EvidenceTests.test_empty_evidence_is_rejected) ... ok
+test_exact_quote_still_requires_human_review (test_evidence.EvidenceTests.test_exact_quote_still_requires_human_review) ... ok
+test_fabricated_quote_is_rejected (test_evidence.EvidenceTests.test_fabricated_quote_is_rejected) ... ok
+test_malformed_citation_is_rejected (test_evidence.EvidenceTests.test_malformed_citation_is_rejected) ... ok
+test_unknown_source_is_rejected (test_evidence.EvidenceTests.test_unknown_source_is_rejected) ... ok
+test_untrusted_status_cannot_mark_work_complete (test_evidence.EvidenceTests.test_untrusted_status_cannot_mark_work_complete) ... ok
+test_details_can_be_added_before_pdf (test_invoice_store.StoreTests.test_details_can_be_added_before_pdf) ... ok
+test_direct_simulated_completion_is_rejected (test_invoice_store.StoreTests.test_direct_simulated_completion_is_rejected) ... ok
+test_only_owner_can_release (test_invoice_store.StoreTests.test_only_owner_can_release) ... ok
+test_same_name_can_represent_different_stays (test_invoice_store.StoreTests.test_same_name_can_represent_different_stays) ... ok
+test_two_operators_cannot_claim_same_request (test_invoice_store.StoreTests.test_two_operators_cannot_claim_same_request) ... ok
+test_invoice_missing_details_and_conflict_are_preserved (test_workflow.WorkflowTests.test_invoice_missing_details_and_conflict_are_preserved) ... ok
+test_no_request_is_not_an_invoice_task (test_workflow.WorkflowTests.test_no_request_is_not_an_invoice_task) ... ok
+test_report_escapes_untrusted_text (test_workflow.WorkflowTests.test_report_escapes_untrusted_text) ... ok
+test_unknown_state_fails (test_workflow.WorkflowTests.test_unknown_state_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.451s
+
+OK

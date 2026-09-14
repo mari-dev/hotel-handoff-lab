@@ -1,0 +1,96 @@
+{
+  "mode": "Live Strands extraction",
+  "source_sha256": "1e28d01889efc658a2458aebaf54ffa2310223024dfbac2cef64c427f5845e10",
+  "sources": {
+    "note-1": "Zimmer 12: Rechnung angefragt. Firmenadresse fehlt.",
+    "note-2": "Zimmer 18: Heizung repariert, Auftrag erledigt.",
+    "note-3": "Zimmer 18: Gast meldet, die Heizung funktioniert noch nicht.",
+    "note-4": "Camera 24: prenotare un taxi per domani alle 07:00.",
+    "note-5": "Zimmer 30: Check-in abgeschlossen."
+  },
+  "tasks": [
+    {
+      "task_key": "checkin_room30",
+      "observations": [
+        {
+          "text": "Check-in completed for Room 30.",
+          "evidence": [
+            {
+              "source_id": "note-5",
+              "quote": "Zimmer 30: Check-in abgeschlossen."
+            }
+          ],
+          "status": "needs_human_review",
+          "state": "completed"
+        }
+      ],
+      "attention": "completion_reported",
+      "status": "needs_human_review"
+    },
+    {
+      "task_key": "heating_room18",
+      "observations": [
+        {
+          "text": "Heating in Room 18 has been repaired, task completed.",
+          "evidence": [
+            {
+              "source_id": "note-2",
+              "quote": "Zimmer 18: Heizung repariert, Auftrag erledigt."
+            }
+          ],
+          "status": "needs_human_review",
+          "state": "completed"
+        },
+        {
+          "text": "Guest in Room 18 reports that the heating is still not working.",
+          "evidence": [
+            {
+              "source_id": "note-3",
+              "quote": "Zimmer 18: Gast meldet, die Heizung funktioniert noch nicht."
+            }
+          ],
+          "status": "needs_human_review",
+          "state": "requested"
+        }
+      ],
+      "attention": "conflicting_reports",
+      "status": "needs_human_review"
+    },
+    {
+      "task_key": "invoice_room12",
+      "observations": [
+        {
+          "text": "Invoice requested for Room 12, but the company address is missing.",
+          "evidence": [
+            {
+              "source_id": "note-1",
+              "quote": "Zimmer 12: Rechnung angefragt. Firmenadresse fehlt."
+            }
+          ],
+          "status": "needs_human_review",
+          "state": "missing_information"
+        }
+      ],
+      "attention": "information_needed",
+      "status": "needs_human_review"
+    },
+    {
+      "task_key": "taxi_camera24",
+      "observations": [
+        {
+          "text": "Booking a taxi for Camera 24 for tomorrow at 07:00.",
+          "evidence": [
+            {
+              "source_id": "note-4",
+              "quote": "Camera 24: prenotare un taxi per domani alle 07:00."
+            }
+          ],
+          "status": "needs_human_review",
+          "state": "requested"
+        }
+      ],
+      "attention": "open_work",
+      "status": "needs_human_review"
+    }
+  ]
+}

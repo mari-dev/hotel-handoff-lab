@@ -1,0 +1,34 @@
+{
+  "proposal": {
+    "invoice_requested": true,
+    "request_quote": "Anna Keller requests an invoice for 12–14 September.",
+    "guest": {
+      "value": "Anna Keller",
+      "quote": "Anna Keller"
+    },
+    "stay": {
+      "value": "12–14 September",
+      "quote": "12–14 September"
+    },
+    "company": {
+      "value": "Example GmbH",
+      "quote": "Example GmbH"
+    },
+    "address": null
+  },
+  "usage": {
+    "inputTokens": 5229,
+    "outputTokens": 395,
+    "totalTokens": 5624
+  },
+  "mode": "live-strands",
+  "tool_calls": [
+    {
+      "name": "read_request_message"
+    },
+    {
+      "name": "find_existing_requests",
+      "guest": "Anna Keller"
+    }
+  ]
+}

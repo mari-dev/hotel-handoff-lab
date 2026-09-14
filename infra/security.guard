@@ -1,0 +1,18 @@
+# Agent-authored project checks; not a comprehensive compliance certification.
+let buckets = Resources.*[ Type == 'AWS::S3::Bucket' ]
+let functions = Resources.*[ Type == 'AWS::Lambda::Function' ]
+rule private_encrypted_artifacts when %buckets !empty {
+    %buckets.Properties.PublicAccessBlockConfiguration.BlockPublicAcls == true
+    %buckets.Properties.PublicAccessBlockConfiguration.IgnorePublicAcls == true
+    %buckets.Properties.PublicAccessBlockConfiguration.BlockPublicPolicy == true
+    %buckets.Properties.PublicAccessBlockConfiguration.RestrictPublicBuckets == true
+    %buckets.Properties.BucketEncryption exists
+    %buckets.Properties.VersioningConfiguration.Status == 'Enabled'
+}
+rule bounded_judge_compute when %functions !empty {
+    %functions.Properties.Runtime == 'python3.13'
+    %functions.Properties.ReservedConcurrentExecutions == 1
+    %functions.Properties.Timeout <= 120
+    %functions.Properties.Environment.Variables.HANDOFF_MODEL_ID == 'amazon.nova-lite-v1:0'
+    %functions.Properties.Environment.Variables.JUDGE_PASSWORD exists
+}

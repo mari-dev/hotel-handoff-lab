@@ -1,0 +1,66 @@
+{
+  "sources": {
+    "note-1": "Zimmer 12: Rechnung angefragt. Firmenadresse fehlt.",
+    "note-2": "Zimmer 18: Heizung repariert, Auftrag erledigt.",
+    "note-3": "Zimmer 18: Gast meldet, die Heizung funktioniert noch nicht.",
+    "note-4": "Camera 24: prenotare un taxi per domani alle 07:00.",
+    "note-5": "Zimmer 30: Check-in abgeschlossen."
+  },
+  "observations": [
+    {
+      "task_key": "stay-12/invoice",
+      "text": "Invoice requested",
+      "state": "requested",
+      "evidence": [
+        {
+          "source_id": "note-1",
+          "quote": "Rechnung angefragt."
+        }
+      ]
+    },
+    {
+      "task_key": "stay-12/invoice",
+      "text": "Company address is missing",
+      "state": "missing_information",
+      "evidence": [
+        {
+          "source_id": "note-1",
+          "quote": "Firmenadresse fehlt."
+        }
+      ]
+    },
+    {
+      "task_key": "stay-18/heating",
+      "text": "Repair reported complete",
+      "state": "completed",
+      "evidence": [
+        {
+          "source_id": "note-2",
+          "quote": "Heizung repariert, Auftrag erledigt."
+        }
+      ]
+    },
+    {
+      "task_key": "stay-18/heating",
+      "text": "Guest reports heating still broken",
+      "state": "open",
+      "evidence": [
+        {
+          "source_id": "note-3",
+          "quote": "Gast meldet, die Heizung funktioniert noch nicht."
+        }
+      ]
+    },
+    {
+      "task_key": "stay-24/taxi",
+      "text": "Taxi requested for tomorrow at 07:00; confirm the calendar date",
+      "state": "requested",
+      "evidence": [
+        {
+          "source_id": "note-4",
+          "quote": "prenotare un taxi per domani alle 07:00."
+        }
+      ]
+    }
+  ]
+}
