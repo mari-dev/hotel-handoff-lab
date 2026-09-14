@@ -6,7 +6,7 @@
 <style>
   :root{
     --ink:#172d2a; --paper:#f3f5f4; --accent:#805614; --teal:#568879; --teal-dark:#385149;
-    --card:#ffffff; --line:#d4dfda;
+    --card:#ffffff; --line:#d4dfda; --warm:#a9703f;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;width:1440px;height:1050px;background:var(--paper);
@@ -15,113 +15,285 @@
   .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
     justify-content:center;opacity:0}
   .caption{position:absolute;bottom:70px;left:0;right:0;text-align:center;
-    font-size:34px;color:var(--ink);font-weight:600;letter-spacing:.2px;opacity:0}
+    font-size:32px;color:var(--ink);font-weight:600;letter-spacing:.2px;opacity:0;padding:0 60px}
 
-  /* ---------- timeline ---------- */
+  /* ---------- timeline ----------
+     scene T   0.0-2.5   product name card (silent)
+     scene 0   2.5-9.5   narrator: the problem
+     scene 1   9.5-15.1  the complaint call
+     scene 1b  15.1-22.8 the confusion (who was supposed to do this?)
+     scene 2   22.8-39.35  a colleague has a fix (4 lines)
+     scene 3   39.35-42.15 speak it (dictation demo)
+     scene 3b  42.15-49.15 any way you like: voice, keyboard, email, phone or computer
+     scene 4   49.15-54.25 resolution
+     scene 5   54.25-57.25 credit wink
+     Subtitles: each scene's spoken line is shown as a speech bubble at the
+     speaker, not a separate caption, so viewers never read two different
+     texts at once. Only scene 0 and scene 4 (single narrator line, no
+     on-screen speaker) use a bottom caption, and it is verbatim the narration.
+  ------------------------------------ */
   @keyframes fadeInOut{
-    0%{opacity:0} 8%{opacity:1} 84%{opacity:1} 100%{opacity:0}
+    0%{opacity:0} 5%{opacity:1} 92%{opacity:1} 100%{opacity:0}
   }
-  #scene-a{animation:fadeInOut 6.4s ease 0.0s 1 both}
-  #cap-a{animation:fadeInOut 6.4s ease 0.0s 1 both}
-  #scene-b{animation:fadeInOut 6.1s ease 6.4s 1 both}
-  #cap-b{animation:fadeInOut 6.1s ease 6.4s 1 both}
-  #scene-c{animation:fadeInOut 4.8s ease 12.5s 1 both}
-  #cap-c{animation:fadeInOut 4.8s ease 12.5s 1 both}
+  #scene-t{animation:fadeInOut 2.5s ease 0.0s 1 both}
+  #scene-0{animation:fadeInOut 7.0s ease 2.5s 1 both}
+  #scene-1{animation:fadeInOut 5.6s ease 9.5s 1 both}
+  #scene-1b{animation:fadeInOut 7.7s ease 15.1s 1 both}
+  #scene-2{animation:fadeInOut 16.55s ease 22.8s 1 both}
+  #scene-3{animation:fadeInOut 2.8s ease 39.35s 1 both}
+  #scene-3b{animation:fadeInOut 7.0s ease 42.15s 1 both}
+  #scene-4{animation:fadeInOut 5.1s ease 49.15s 1 both}
+  #cap-4{animation:fadeInOut 5.1s ease 49.15s 1 both}
+  #scene-5{animation:fadeInOut 3.0s ease 54.25s 1 both}
 
-  /* ---------- scene A: problem ---------- */
-  .desk{width:520px;height:230px;background:#e7e0cf;border-radius:14px;position:relative;
-    box-shadow:0 20px 40px rgba(0,0,0,.08)}
-  .note{position:absolute;width:120px;height:90px;border-radius:6px;box-shadow:0 8px 16px rgba(0,0,0,.12);
-    display:flex;align-items:center;justify-content:center;font-size:15px;color:#5b4a1f;padding:8px;
-    text-align:center;opacity:0}
-  .note.n1{background:#fff3b0;top:-24px;left:30px;transform:rotate(-9deg);animation:dropIn .6s ease .3s both}
-  .note.n2{background:#ffd9d9;top:-10px;left:190px;transform:rotate(6deg);animation:dropIn .6s ease .8s both}
-  .note.n3{background:#d7ecff;top:-30px;left:340px;transform:rotate(-4deg);animation:dropIn .6s ease 1.3s both}
-  @keyframes dropIn{from{opacity:0;transform:translateY(-40px) rotate(0)} to{opacity:1}}
-  .bubble{position:absolute;top:-130px;left:50%;transform:translateX(-50%);background:var(--card);
-    border:2px solid var(--line);border-radius:16px;padding:14px 22px;font-size:22px;color:var(--ink);
-    box-shadow:0 10px 24px rgba(0,0,0,.1);animation:bubbleLife 2.2s ease 1.9s both}
-  @keyframes bubbleLife{0%{opacity:0;transform:translate(-50%,10px) scale(.9)}
-    20%{opacity:1;transform:translate(-50%,0) scale(1)} 70%{opacity:1} 100%{opacity:0;transform:translate(-50%,18px) scale(.96)}}
-  .lost{position:absolute;bottom:-46px;right:60px;font-size:16px;color:#8a6b2b;opacity:0;
-    animation:fadeInOut 1.6s ease 3.2s 1 both}
+  /* ---------- scene T / 0: title cards ---------- */
+  .title-card{font-size:44px;font-weight:700;color:var(--ink);text-align:center;max-width:1000px;
+    line-height:1.35;padding:0 40px}
+  .logo-card{font-size:56px;font-weight:800;color:var(--teal-dark);text-align:center;letter-spacing:-.5px}
+  .logo-card small{display:block;font-size:18px;font-weight:600;color:#6d8079;letter-spacing:1.5px;
+    margin-top:10px;text-transform:uppercase}
 
-  /* ---------- scene B: phone ---------- */
-  .phone{width:270px;height:520px;background:#1c1c1c;border-radius:38px;padding:14px;box-shadow:0 24px 50px rgba(0,0,0,.25)}
-  .phone-screen{width:100%;height:100%;background:#fbfbf9;border-radius:24px;display:flex;flex-direction:column;
-    padding:26px 20px;position:relative}
-  .phone-head{font-size:14px;color:#9aa39d;margin-bottom:14px}
-  .chat-in{background:#eef2ef;border-radius:14px;padding:16px;font-size:22px;color:var(--ink);min-height:34px}
+  /* ---------- shared: speech bubble ---------- */
+  .bubble{position:absolute;background:var(--card);border:2px solid var(--line);border-radius:16px;
+    padding:14px 22px;font-size:21px;color:var(--ink);box-shadow:0 10px 24px rgba(0,0,0,.1);
+    max-width:340px;opacity:0}
+  @keyframes bubbleLife{0%{opacity:0;transform:translateY(10px) scale(.92)}
+    10%{opacity:1;transform:translateY(0) scale(1)} 90%{opacity:1} 100%{opacity:0;transform:translateY(-6px) scale(.98)}}
+
+  /* ---------- shared: person icon ---------- */
+  .person{width:150px;display:flex;flex-direction:column;align-items:center;position:relative}
+  .apron{width:96px;height:118px;background:var(--teal);border-radius:20px 20px 40px 40px;position:relative;margin-top:56px}
+  .apron.alt{background:var(--warm)}
+  .apron:before{content:"";position:absolute;top:-46px;left:24px;width:48px;height:48px;border-radius:50%;background:#f0c9a0}
+  .eyes{position:absolute;top:-32px;left:34px;width:8px;height:8px;border-radius:50%;background:var(--ink);box-shadow:20px 0 0 var(--ink)}
+  .mouth{position:absolute;top:-14px;left:35px;width:26px;height:10px;overflow:hidden}
+  .mouth svg{position:absolute;top:0;left:0}
+  @keyframes hideNeutral{to{opacity:0}}
+  @keyframes showSmile{to{opacity:1}}
+  @keyframes walkIn{from{opacity:0;transform:translateX(60px)} to{opacity:1;transform:translateX(0)}}
+
+  /* ---------- shared: phone mockup ---------- */
+  .phone{width:250px;height:480px;background:#1c1c1c;border-radius:36px;padding:14px;box-shadow:0 24px 50px rgba(0,0,0,.25)}
+  .phone-screen{width:100%;height:100%;background:#fbfbf9;border-radius:22px;display:flex;flex-direction:column;
+    padding:24px 20px;position:relative;align-items:center}
+  .phone-head{font-size:14px;color:#9aa39d;margin-bottom:14px;align-self:flex-start}
+  .chat-in{background:#eef2ef;border-radius:14px;padding:16px;font-size:21px;color:var(--ink);min-height:34px;
+    width:100%;align-self:flex-start}
   .typed{display:inline-block;overflow:hidden;white-space:nowrap;border-right:2px solid var(--teal-dark);
-    animation:type 2.2s steps(20,end) .4s both, blink .8s step-end infinite .4s}
-  @keyframes type{from{width:0} to{width:15ch}}
+    animation:type 1.6s steps(16,end) 39.65s both, blink .8s step-end infinite 39.65s}
+  @keyframes type{from{width:0} to{width:12ch}}
   @keyframes blink{50%{border-color:transparent}}
-  .send{position:absolute;bottom:80px;right:34px;width:52px;height:52px;border-radius:50%;background:var(--teal-dark);
-    display:flex;align-items:center;justify-content:center;opacity:0;animation:pop .5s ease 2.9s both}
-  .send svg{width:24px;height:24px}
+  .send{position:absolute;bottom:36px;right:30px;width:48px;height:48px;border-radius:50%;background:var(--teal-dark);
+    display:flex;align-items:center;justify-content:center;opacity:0;animation:pop .5s ease 41.35s both}
+  .send svg{width:22px;height:22px}
   @keyframes pop{0%{opacity:0;transform:scale(.4)} 70%{opacity:1;transform:scale(1.12)} 100%{opacity:1;transform:scale(1)}}
 
-  /* ---------- scene C: laptop + person ---------- */
+  /* ---------- scene 1: the complaint call ---------- */
+  .call-row{display:flex;align-items:center;gap:90px}
+  .call-avatar{width:90px;height:90px;border-radius:50%;background:#e7e0cf;display:flex;align-items:center;
+    justify-content:center;position:relative;margin:0 auto 18px}
+  .call-avatar svg{width:36px;height:36px}
+  .ring{position:absolute;inset:0;border-radius:50%;border:3px solid var(--warm);opacity:0;
+    animation:ringPulse 1.6s ease-out infinite}
+  .ring.r2{animation-delay:.5s}
+  @keyframes ringPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.9);opacity:0}}
+  .call-label{text-align:center;font-size:14px;color:#8a6b2b;letter-spacing:.4px}
+  .bubble.call{position:static;margin-top:20px;animation:bubbleLife 5.0s ease 9.8s both}
+  .stress{position:absolute;top:-78px;left:18px;font-size:22px;opacity:0;animation:fadeInOut 1.8s ease 12.3s 1 both}
+
+  /* ---------- scene 1b: the confusion (quick back-and-forth) ---------- */
+  .confuse-row{display:flex;align-items:flex-end;gap:60px;position:relative}
+  .bubble.c1spot{top:-140px;left:-30px}
+  .bubble.c2spot{top:-170px;right:-30px}
+  .bubble.q1{animation:bubbleLife 1.8s ease 15.4s both}
+  .bubble.q2{animation:bubbleLife 1.4s ease 17.35s both}
+  .bubble.q3{animation:bubbleLife 1.7s ease 18.89s both}
+  .bubble.q4{animation:bubbleLife 1.6s ease 20.7s both}
+
+  /* ---------- scene 2: a colleague has a fix (pitch, skepticism, reassure x2) ---------- */
+  .duo{display:flex;align-items:flex-end;gap:60px;position:relative}
+  .duo .person.p2{animation:walkIn .7s ease 22.9s both}
+  .bubble.p1spot{top:-150px;left:-40px}
+  .bubble.p2spot{top:-186px;right:-40px}
+  .bubble.pitch{animation:bubbleLife 4.6s ease 23.1s both}
+  .bubble.skeptic{animation:bubbleLife 5.0s ease 27.62s both}
+  .bubble.reassure1{animation:bubbleLife 4.0s ease 32.47s both}
+  .bubble.reassure2{animation:bubbleLife 2.8s ease 36.42s both}
+
+  /* ---------- scene 3: speak it ---------- */
+  .mic{width:34px;height:34px;border-radius:50%;background:var(--teal-dark);display:flex;align-items:center;
+    justify-content:center;position:absolute;top:-52px;left:50%;transform:translateX(-50%);opacity:0;
+    animation:pop .4s ease 39.5s both}
+  .mic svg{width:16px;height:16px}
+  .mic-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--teal);opacity:0;
+    animation:ringPulse 1s ease-out 2 39.65s}
+
+  /* ---------- scene 4: resolution ---------- */
   .desk-row{display:flex;align-items:flex-end;gap:70px}
   .laptop{width:440px}
   .laptop-screen{width:100%;height:260px;background:#0e2422;border-radius:14px 14px 0 0;padding:16px}
   .laptop-body{width:100%;height:16px;background:#12312e;border-radius:0 0 10px 10px}
   .queue-title{color:#cfe3dd;font-size:14px;letter-spacing:.5px;margin-bottom:10px}
   .queue-card{background:#fff;border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;
-    align-items:center;transform:translateY(0);box-shadow:0 0 0 rgba(0,0,0,0)}
-  .queue-card.hit{animation:glow 1.1s ease 1.1s both}
+    align-items:center}
+  .queue-card.hit{animation:glow 1.1s ease 51.65s both}
   @keyframes glow{0%{box-shadow:0 0 0 rgba(86,136,121,0)} 40%{box-shadow:0 0 0 8px rgba(86,136,121,.35)} 100%{box-shadow:0 0 0 rgba(86,136,121,0)}}
   .qname{font-size:19px;color:var(--ink);font-weight:600}
   .qstatus{font-size:13px;padding:4px 10px;border-radius:20px;background:#fdecc8;color:#7a5514}
-  .qstatus.done{background:#dcf3e6;color:#1f6b46;animation:none}
-  .qstatus{animation:statusA 0s}
-  .qstatus.morph{animation:none}
-
-  .person{width:150px;display:flex;flex-direction:column;align-items:center;opacity:0;
-    animation:walkIn .8s ease .1s both}
-  @keyframes walkIn{from{opacity:0;transform:translateX(60px)} to{opacity:1;transform:translateX(0)}}
-  .apron{width:96px;height:118px;background:var(--teal);border-radius:20px 20px 40px 40px;position:relative;margin-top:10px}
-  .apron:before{content:"";position:absolute;top:-46px;left:24px;width:48px;height:48px;border-radius:50%;background:#f0c9a0}
-  .eyes{position:absolute;top:-32px;left:34px;width:8px;height:8px;border-radius:50%;background:var(--ink);box-shadow:20px 0 0 var(--ink)}
-  .mouth{position:absolute;top:-14px;left:35px;width:26px;height:10px;overflow:hidden}
-  .mouth svg{position:absolute;top:0;left:0}
-  .mouth-neutral{opacity:1;animation:hideNeutral .5s ease 3.0s forwards}
-  .mouth-smile{opacity:0;animation:showSmile .5s ease 3.0s forwards}
-  @keyframes hideNeutral{to{opacity:0}}
-  @keyframes showSmile{to{opacity:1}}
+  .qstatus.done{background:#dcf3e6;color:#1f6b46}
   .check{position:absolute;top:-70px;right:-10px;width:40px;height:40px;border-radius:50%;background:#2f8f5b;
-    display:flex;align-items:center;justify-content:center;opacity:0;animation:pop .5s ease 2.6s both}
+    display:flex;align-items:center;justify-content:center;opacity:0;animation:pop .5s ease 51.65s both}
   .check svg{width:20px;height:20px}
+  .res-mouth-flat{opacity:1;animation:hideNeutral .5s ease 51.65s forwards}
+  .res-mouth-smile{opacity:0;animation:showSmile .5s ease 51.65s forwards}
+
+  /* ---------- scene 3b: any way you like ---------- */
+  .flex-icons{display:flex;gap:56px;margin-bottom:34px}
+  .flex-icon{width:64px;height:64px;border-radius:50%;background:var(--card);border:2px solid var(--line);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(0,0,0,.08);opacity:0}
+  .flex-icon svg{width:26px;height:26px}
+  .flex-icon.i1{animation:pop .5s ease 42.45s both}
+  .flex-icon.i2{animation:pop .5s ease 43.05s both}
+  .flex-icon.i3{animation:pop .5s ease 43.65s both}
+  .flex-box{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:16px 28px;
+    font-size:20px;color:var(--ink);font-weight:600;opacity:0;animation:bubbleLife 5.0s ease 44.3s both}
+  .flex-devices{display:flex;gap:14px;margin-top:24px;opacity:0;animation:fadeInOut 4.0s ease 45.0s 1 both}
+  .flex-devices span{font-size:13px;color:#6d8079;font-weight:600;letter-spacing:.3px;
+    background:#e9eedf;padding:5px 12px;border-radius:20px}
+
+  /* ---------- scene 5: credit wink ---------- */
+  .credit-row{display:flex;align-items:flex-end;gap:110px}
+  .apron.spectator{background:#9aa3a0}
+  .badge{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.85);
+    color:var(--ink);font-size:11px;font-weight:700;letter-spacing:.4px;padding:3px 9px;border-radius:20px;
+    white-space:nowrap}
+  .glasses{position:absolute;top:-37px;left:29px;pointer-events:none}
+  .flower{position:absolute;top:36px;left:70px;width:16px;height:16px}
+  .flower span{position:absolute;width:8px;height:8px;border-radius:50%;background:#9c2b3a}
+  .flower span:nth-child(1){top:0;left:4px}.flower span:nth-child(2){top:5px;left:0}
+  .flower span:nth-child(3){top:5px;left:8px}.flower span:nth-child(4){top:9px;left:4px}
+  .flower i{position:absolute;top:5px;left:5px;width:5px;height:5px;border-radius:50%;background:#e0b23a}
+  .wink-eyes{position:absolute;top:-32px;left:34px;display:flex;gap:12px}
+  .wink-eyes span{width:8px;height:8px;border-radius:50%;background:var(--ink);display:block}
+  .wink-eyes span.r{animation:wink 3s ease 54.85s infinite}
+  @keyframes wink{0%,20%,100%{height:8px;border-radius:50%}10%{height:2px;border-radius:2px;transform:translateY(3px)}}
+  .credit-caption{position:absolute;bottom:70px;left:0;right:0;text-align:center;font-size:26px;
+    color:var(--ink);font-weight:600;opacity:0;animation:fadeInOut 3.0s ease 54.25s 1 both}
 </style>
 </head>
 <body>
 <div class="stage">
 
-  <div class="scene" id="scene-a">
-    <div class="desk">
-      <div class="note n1">Ms. K.<br>Invoice?</div>
-      <div class="note n2">Room 12<br>call back</div>
-      <div class="note n3">Taxi 8:00</div>
-      <div class="bubble">"Could you send me my invoice?"</div>
-    </div>
-    <div class="lost">…written down, then forgotten by the next shift.</div>
+  <!-- Scene T: product name card -->
+  <div class="scene" id="scene-t">
+    <div class="logo-card">Hotel Handoff Lab<small>Invoice requests, coordinated</small></div>
   </div>
-  <div class="caption" id="cap-a">Guests ask in person, by phone, or in passing. Notes get lost.</div>
 
-  <div class="scene" id="scene-b">
+  <!-- Scene 0: title card -->
+  <div class="scene" id="scene-0">
+    <div class="title-card">Small hotel teams struggle to coordinate.<br>And even a simple fix meets resistance.</div>
+  </div>
+
+  <!-- Scene 1: the complaint call -->
+  <div class="scene" id="scene-1">
+    <div class="call-row">
+      <div class="person">
+        <div class="stress">😣</div>
+        <div class="apron">
+          <div class="eyes"></div>
+          <div class="mouth"><svg width="26" height="10"><path d="M2 5h22" stroke="#172d2a" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+      <div>
+        <div class="call-avatar">
+          <div class="ring"></div><div class="ring r2"></div>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M6 3c1 2 2 3 1 4l-1.5 1.5a13 13 0 0 0 10 10L17 17c1-1 2 0 4 1 1.5.8 2 2 1 3-1 1.5-2.5 2-4 1.5C11 20 4 13 2.5 6c-.5-1.5 0-3 1.5-4 1-1 2.5-.5 3 1z" fill="#805614"/></svg>
+        </div>
+        <div class="call-label">INCOMING CALL</div>
+        <div class="bubble call">"When are you sending my invoice? I've asked three times!"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 1b: the confusion -->
+  <div class="scene" id="scene-1b">
+    <div class="confuse-row">
+      <div class="person">
+        <div class="bubble c1spot q1">"Did you take care of that?"</div>
+        <div class="bubble c1spot q3">"Didn't you write it down?"</div>
+        <div class="apron">
+          <div class="eyes"></div>
+          <div class="mouth"><svg width="26" height="10"><path d="M2 5h22" stroke="#172d2a" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+      <div class="person">
+        <div class="bubble c2spot q2">"Wait, I thought you did."</div>
+        <div class="bubble c2spot q4">"Where would I even write it?"</div>
+        <div class="apron alt">
+          <div class="eyes"></div>
+          <div class="mouth"><svg width="26" height="10"><path d="M2 5h22" stroke="#172d2a" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 2: a colleague has a fix -->
+  <div class="scene" id="scene-2">
+    <div class="duo">
+      <div class="person p1">
+        <div class="bubble p1spot skeptic">"Ugh, what a hassle. I don't want to enter data by hand."</div>
+        <div class="apron">
+          <div class="eyes"></div>
+          <div class="mouth"><svg width="26" height="10"><path d="M2 5h22" stroke="#172d2a" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+      <div class="person p2">
+        <div class="bubble p2spot pitch">"I found an app for this. We log every request right here now."</div>
+        <div class="bubble p2spot reassure1">"No, it's easy. You just say it, and the app sorts it out."</div>
+        <div class="bubble p2spot reassure2">"Trust me. It takes a second."</div>
+        <div class="apron alt">
+          <div class="eyes"></div>
+          <div class="mouth"><svg width="26" height="10" style="opacity:1"><path d="M2 3c5 6 17 6 22 0" stroke="#172d2a" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 3: speak it -->
+  <div class="scene" id="scene-3">
     <div class="phone">
       <div class="phone-screen">
+        <div class="mic"><div class="mic-ring"></div>
+          <svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" fill="#fff"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
         <div class="phone-head">New request</div>
-        <div class="chat-in"><span class="typed">Keller — invoice</span></div>
+        <div class="chat-in"><span class="typed">Keller, invoice</span></div>
         <div class="send">
           <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h14m0 0-6-6m6 6-6 6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
       </div>
     </div>
   </div>
-  <div class="caption" id="cap-b">One name, typed once. Everyone can see it, nothing to remember.</div>
 
-  <div class="scene" id="scene-c">
+  <!-- Scene 3b: any way you like -->
+  <div class="scene" id="scene-3b">
+    <div class="flex-icons">
+      <div class="flex-icon i1">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke="#172d2a" stroke-width="1.8"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3" stroke="#172d2a" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="flex-icon i2">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="#172d2a" stroke-width="1.8"/><path d="M7 10h.01M11 10h.01M15 10h.01M17 10h.01M7 14h8" stroke="#172d2a" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="flex-icon i3">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#172d2a" stroke-width="1.8"/><path d="m3 7 9 6 9-6" stroke="#172d2a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <div class="flex-box">Voice · keyboard · pasted email — one message box</div>
+    <div class="flex-devices"><span>PHONE</span><span>COMPUTER</span></div>
+  </div>
+
+  <!-- Scene 4: resolution -->
+  <div class="scene" id="scene-4">
     <div class="desk-row">
       <div class="laptop">
         <div class="laptop-screen">
@@ -133,26 +305,51 @@
         </div>
         <div class="laptop-body"></div>
       </div>
-      <div class="person">
+      <div class="person" style="animation:walkIn .8s ease 49.25s both">
         <div class="check">
           <svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="apron">
           <div class="eyes"></div>
           <div class="mouth">
-            <svg class="mouth-neutral" width="26" height="10"><path d="M2 5h22" stroke="#172d2a" stroke-width="2.4" stroke-linecap="round"/></svg>
-            <svg class="mouth-smile" width="26" height="10"><path d="M2 3c5 6 17 6 22 0" stroke="#172d2a" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+            <svg class="res-mouth-flat" width="26" height="10"><path d="M2 5h22" stroke="#172d2a" stroke-width="2.4" stroke-linecap="round"/></svg>
+            <svg class="res-mouth-smile" width="26" height="10"><path d="M2 3c5 6 17 6 22 0" stroke="#172d2a" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="caption" id="cap-c">Whoever is free picks it up, and knows exactly who it's for.</div>
+  <div class="caption" id="cap-4">Whoever is free picks it up, and knows exactly who it's for.</div>
+
+  <!-- Scene 5: credit wink -->
+  <div class="scene" id="scene-5">
+    <div class="credit-row">
+      <div class="person">
+        <div class="apron spectator">
+          <div class="badge">mari-dev</div>
+          <div class="flower"><span></span><span></span><span></span><span></span><i></i></div>
+          <div class="eyes"></div>
+          <svg class="glasses" width="38" height="18" viewBox="0 0 38 18" fill="none">
+            <circle cx="9" cy="9" r="8" stroke="#172d2a" stroke-width="1.6"/>
+            <circle cx="29" cy="9" r="8" stroke="#172d2a" stroke-width="1.6"/>
+            <path d="M17 8h4" stroke="#172d2a" stroke-width="1.6"/>
+          </svg>
+          <div class="mouth"><svg width="26" height="10"><path d="M2 5h22" stroke="#172d2a" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+      <div class="person">
+        <div class="apron alt">
+          <div class="wink-eyes"><span class="l"></span><span class="r"></span></div>
+          <div class="mouth"><svg width="26" height="10" style="opacity:1"><path d="M2 3c5 6 17 6 22 0" stroke="#172d2a" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="credit-caption">Built by mari-dev</div>
 
 </div>
 <script>
-  // status label flips once the card is "seen"
-  setTimeout(()=>{ const s=document.getElementById('qstat'); s.textContent='In progress'; s.classList.add('done'); }, 2600);
+  setTimeout(()=>{ const s=document.getElementById('qstat'); s.textContent='In progress'; s.classList.add('done'); }, 51650);
 </script>
 </body>
 </html>

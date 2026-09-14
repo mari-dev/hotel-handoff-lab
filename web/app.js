@@ -57,6 +57,29 @@ $('#intake-evidence').innerHTML=['guest','stay','company','address'].filter(k=>p
 localize($('#intake-evidence'));$('#intake-status').textContent=t('Proposal ready. Check the name and stay before saving. Nothing has been saved automatically.');$('#guest').dispatchEvent(new Event('input'));$('#form').querySelector('details:not(#intake-box)').open=true;
 }catch(err){$('#intake-status').textContent=t(err.message);}finally{button.disabled=false;}};
 
+const SpeechRecognitionCtor=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(SpeechRecognitionCtor){
+  const dictateButton=$('#dictate');dictateButton.hidden=false;
+  const localeFor={en:'en-US',de:'de-DE',it:'it-IT'};
+  let recognizer=null,listening=false,baseText='';
+  function stopDictation(){listening=false;dictateButton.classList.remove('listening');dictateButton.querySelector('span').textContent=t('Dictate');if(recognizer)recognizer.stop();}
+  dictateButton.onclick=()=>{
+    if(listening){stopDictation();return;}
+    recognizer=new SpeechRecognitionCtor();
+    recognizer.lang=localeFor[language]||'en-US';
+    recognizer.continuous=true;recognizer.interimResults=true;
+    baseText=$('#intake-message').value;
+    if(baseText&&!/\s$/.test(baseText))baseText+=' ';
+    recognizer.onresult=e=>{let finalText='',interimText='';
+      for(let i=0;i<e.results.length;i++){const r=e.results[i];if(r.isFinal)finalText+=r[0].transcript;else interimText+=r[0].transcript;}
+      $('#intake-message').value=baseText+finalText+interimText;};
+    recognizer.onerror=()=>stopDictation();
+    recognizer.onend=()=>{if(listening)stopDictation();};
+    recognizer.start();
+    listening=true;dictateButton.classList.add('listening');dictateButton.querySelector('span').textContent=t('Listening… tap to stop');
+  };
+}
+
 $('#language').value=language;
 const changeLanguage=async(event)=>{
   language=event.target.value;

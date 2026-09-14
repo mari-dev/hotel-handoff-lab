@@ -1,11 +1,11 @@
-"""Record the intro animation (scripts/video/intro-animation.html) as a video."""
+"""Record the outro card (scripts/video/outro-animation.html) as a video."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 HERE = Path(__file__).parent
-OUT = HERE / "out" / "intro"
+OUT = HERE / "out" / "outro"
 OUT.mkdir(parents=True, exist_ok=True)
-DURATION_MS = 58_500
+DURATION_MS = 4_000
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
@@ -15,7 +15,7 @@ with sync_playwright() as p:
         record_video_size={"width": 1440, "height": 1050},
     )
     page = context.new_page()
-    page.goto((HERE / "intro-animation.html").resolve().as_uri())
+    page.goto((HERE / "outro-animation.html").resolve().as_uri())
     page.wait_for_timeout(DURATION_MS)
     context.close()
     browser.close()

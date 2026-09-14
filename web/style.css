@@ -7,3 +7,4 @@
 header{gap:14px;flex-wrap:wrap;padding:12px 0}.language-control select{width:auto;padding:6px 9px;margin:0;font-size:12px}.language-control{margin-left:auto}@media(max-width:700px){header>span{display:none}.language-control{gap:6px}header{letter-spacing:0}.brand span{font-size:17px}aside{gap:6px;padding:14px 12px}nav{gap:2px}.nav{padding:8px 5px}.tabs{flex-wrap:wrap}.intro .primary{padding:12px}.stats span{overflow-wrap:anywhere}}
 
 #language-dialog{width:auto;padding:5px 8px;font-size:12px;margin-left:auto;margin-right:12px}.dialog-top{gap:8px}
+#dictate.listening{background:#a63d31;color:#fff;animation:dictate-pulse 1.2s ease-in-out infinite}@keyframes dictate-pulse{0%,100%{opacity:1}50%{opacity:.6}}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hotel Handoff Lab — outro</title>
+<style>
+  :root{ --ink:#172d2a; --paper:#f3f5f4; --teal-dark:#385149; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;width:1440px;height:1050px;background:var(--paper);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow:hidden}
+  .stage{position:relative;width:1440px;height:1050px;display:flex;align-items:center;justify-content:center}
+  .card{opacity:0;text-align:center;animation:show 3.6s ease .2s 1 both}
+  @keyframes show{0%{opacity:0;transform:translateY(10px)} 10%{opacity:1;transform:translateY(0)}
+    88%{opacity:1} 100%{opacity:0}}
+  .thanks{font-size:52px;font-weight:800;color:var(--teal-dark);letter-spacing:-.5px}
+  .sub{margin-top:14px;font-size:18px;font-weight:600;color:#6d8079;letter-spacing:1px;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="card">
+    <div class="thanks">Thank you for watching.</div>
+    <div class="sub">Hotel Handoff Lab</div>
+  </div>
+</div>
+</body>
+</html>

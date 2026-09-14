@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hotel Handoff Lab — thumbnail</title>
+<style>
+  :root{
+    --ink:#172d2a; --paper:#f3f5f4; --teal:#568879; --teal-dark:#385149; --warm:#a9703f; --accent:#e8c97a;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;width:1280px;height:720px;background:var(--paper);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;overflow:hidden}
+  .stage{position:relative;width:1280px;height:720px;background:
+    radial-gradient(1100px 700px at 78% 18%, #eef2ea 0%, var(--paper) 55%);}
+  .stage:before{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(56,81,73,.05), rgba(56,81,73,0) 40%)}
+
+  .brand{position:absolute;top:44px;left:56px;display:flex;align-items:center;gap:10px;
+    font-size:20px;font-weight:800;color:var(--teal-dark);letter-spacing:.5px}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--warm)}
+
+  .headline{position:absolute;top:150px;left:56px;width:760px}
+  .headline h1{margin:0;font-size:74px;line-height:1.04;font-weight:800;color:var(--ink);letter-spacing:-1.5px}
+  .headline h1 .hi{color:var(--warm)}
+  .sub{margin-top:22px;font-size:26px;font-weight:600;color:#3e534c}
+
+  .badge{position:absolute;bottom:52px;left:56px;display:flex;gap:10px}
+  .badge span{background:#fff;border:2px solid #d4dfda;border-radius:20px;padding:8px 18px;
+    font-size:16px;font-weight:700;color:var(--teal-dark);letter-spacing:.3px}
+
+  /* right side scene: phone + laptop, mirroring the video's own icon style */
+  .scene{position:absolute;right:60px;top:110px;width:520px;height:520px}
+  .card{position:absolute;background:#fff;border:2px solid #d4dfda;border-radius:20px;
+    box-shadow:0 22px 50px rgba(0,0,0,.10)}
+  .card.phone{width:200px;height:380px;left:40px;top:60px;padding:20px;background:#1c1c1c;border:none;
+    border-radius:32px}
+  .phone-screen{width:100%;height:100%;background:#fbfbf9;border-radius:20px;padding:20px}
+  .phone-line{background:#eef2ef;border-radius:10px;height:18px;margin-bottom:10px}
+  .phone-line.w1{width:90%}.phone-line.w2{width:60%}
+  .phone-chip{margin-top:18px;background:#dcf3e6;color:#1f6b46;font-size:12px;font-weight:800;
+    border-radius:16px;padding:6px 12px;display:inline-block}
+
+  .card.laptop{width:320px;height:210px;right:0;top:230px;padding:18px;background:var(--teal-dark);
+    border:none}
+  .laptop-title{color:#cfe3dd;font-size:13px;letter-spacing:1px;font-weight:800;margin-bottom:12px}
+  .laptop-row{background:#fff;border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;
+    align-items:center;margin-bottom:8px}
+  .laptop-row b{font-size:15px;color:var(--ink)}
+  .laptop-row span{font-size:11px;font-weight:800;color:#7a5514;background:#fdecc8;border-radius:14px;
+    padding:4px 9px}
+  .laptop-row.done span{color:#1f6b46;background:#dcf3e6}
+
+  .check{position:absolute;right:26px;top:206px;width:70px;height:70px;border-radius:50%;
+    background:#2f8f5b;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 14px 30px rgba(47,143,91,.35)}
+  .check svg{width:34px;height:34px}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="brand"><span class="dot"></span>HOTEL HANDOFF LAB</div>
+
+  <div class="headline">
+    <h1>Stop <span class="hi">Losing</span><br>Invoice Requests</h1>
+    <div class="sub">Between shifts — source-backed, staff-owned.</div>
+  </div>
+
+  <div class="badge"><span>Strands</span><span>Amazon Bedrock</span></div>
+
+  <div class="scene">
+    <div class="card phone">
+      <div class="phone-screen">
+        <div class="phone-line w1"></div>
+        <div class="phone-line w2"></div>
+        <div class="phone-chip">✓ Logged</div>
+      </div>
+    </div>
+    <div class="card laptop">
+      <div class="laptop-title">SHARED QUEUE</div>
+      <div class="laptop-row done"><b>Keller</b><span>Sent</span></div>
+      <div class="laptop-row"><b>Müller</b><span>To prepare</span></div>
+    </div>
+    <div class="check">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5 9.5 18 20 6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>

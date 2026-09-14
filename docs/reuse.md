@@ -19,8 +19,7 @@ Competition rules checked 2026-09-13:
 https://agentsforhumans.devpost.com/rules
 The project must be newly built during the submission period; incorporated
 pre-existing work must be disclosed. Submission requires a public repository
-with MIT or Apache licensing. Public release and working judge access are being prepared. Private reference
-snapshots are excluded from the public source distribution.
+with MIT or Apache licensing. Public release and working judge access are being prepared.
 
 ## i18next
 
@@ -28,7 +27,7 @@ i18next 26.4.2 is vendored from the official npm tarball, verified against its S
 
 ## Current implementation and judge package
 
-Authentication dependency planned before incorporation: Werkzeug, BSD-3-Clause,
+Authentication dependency: Werkzeug, BSD-3-Clause,
 official source https://github.com/pallets/werkzeug and license
 https://github.com/pallets/werkzeug/blob/main/LICENSE.txt. Use the packaged
 generate_password_hash/check_password_hash APIs; no library source copying.

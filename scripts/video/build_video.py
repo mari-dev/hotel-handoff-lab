@@ -4,7 +4,7 @@ the intro + demo recordings, using each clip's real measured duration so nothing
 import glob, json, subprocess, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
-from narration import INTRO_LINES as INTRO_TEXT
+from narration import INTRO_LINES as INTRO_TEXT, OUTRO_LINES as OUTRO_TEXT
 
 ROOT = Path(__file__).resolve().parents[2]
 VID = ROOT / "scripts/video"
@@ -15,12 +15,18 @@ DURATIONS = json.loads((AUDIO / "durations.json").read_text())
 INTRO_VIDEO = sorted(glob.glob(str(OUT / "intro" / "*.webm")))[0]
 DEMO_VIDEO = OUT / "demo" / "hotel-handoff-demo.webm"
 DEMO_TIMELINE = json.loads((OUT / "demo/timeline.json").read_text())
+OUTRO_VIDEO = sorted(glob.glob(str(OUT / "outro" / "*.webm")))[0]
+OUTRO_LINES = [{"text": text, "offset_ms": 300} for text in OUTRO_TEXT]
 
-# Fixed offsets matching the CSS scene timings in intro-animation.html.
+# Fixed offsets matching the CSS scene timings in intro-animation.html:
+# scene-t 0.0-2.5 (product name, silent), scene0 2.5-9.5 (narrator problem),
+# scene1 9.5-15.1 (guest call), scene1b 15.1-22.8 (the confusion, 4 lines),
+# scene2 22.8-38.9 (pitch/skeptic/reassure x2), scene3 38.9-41.7 (dictation),
+# scene4 41.7-46.8 (narrator resolution).
+INTRO_OFFSETS = [2800, 9800, 15400, 17350, 18890, 20700, 23100, 27620, 32470, 36420, 39650, 42450, 49450]
 INTRO_LINES = [
-    {"text": INTRO_TEXT[0], "offset_ms": 300},
-    {"text": INTRO_TEXT[1], "offset_ms": 6400 + 300},
-    {"text": INTRO_TEXT[2], "offset_ms": 12500 + 300},
+    {"text": line["text"], "offset_ms": offset}
+    for line, offset in zip(INTRO_TEXT, INTRO_OFFSETS)
 ]
 
 FFMPEG = "/home/mari/miniconda3/bin/ffmpeg"
@@ -59,9 +65,9 @@ def mux(video_path, audio_path, out_path):
                      "-shortest", str(out_path)], check=True, capture_output=True)
 
 
-def concat(video_a, video_b, out_path):
+def concat(videos, out_path):
     listfile = OUT / "concat.txt"
-    listfile.write_text(f"file '{video_a}'\nfile '{video_b}'\n")
+    listfile.write_text("".join(f"file '{v}'\n" for v in videos))
     subprocess.run([FFMPEG, "-y", "-f", "concat", "-safe", "0", "-i", str(listfile),
                      "-c", "copy", str(out_path)], check=True, capture_output=True)
 
@@ -69,18 +75,23 @@ def concat(video_a, video_b, out_path):
 def main():
     synth_all(INTRO_LINES, "intro")
     synth_all(DEMO_TIMELINE, "demo")
+    synth_all(OUTRO_LINES, "outro")
 
     intro_dur = probe_duration_ms(INTRO_VIDEO)
     demo_dur = probe_duration_ms(DEMO_VIDEO)
-    print("intro_dur", intro_dur, "demo_dur", demo_dur)
+    outro_dur = probe_duration_ms(OUTRO_VIDEO)
+    print("intro_dur", intro_dur, "demo_dur", demo_dur, "outro_dur", outro_dur)
 
     build_mix(INTRO_LINES, intro_dur, AUDIO / "intro-mix.wav")
     build_mix(DEMO_TIMELINE, demo_dur, AUDIO / "demo-mix.wav")
+    build_mix(OUTRO_LINES, outro_dur, AUDIO / "outro-mix.wav")
 
     mux(INTRO_VIDEO, AUDIO / "intro-mix.wav", OUT / "intro-narrated.mp4")
     mux(DEMO_VIDEO, AUDIO / "demo-mix.wav", OUT / "demo-narrated.mp4")
+    mux(OUTRO_VIDEO, AUDIO / "outro-mix.wav", OUT / "outro-narrated.mp4")
 
-    concat(OUT / "intro-narrated.mp4", OUT / "demo-narrated.mp4", OUT / "hotel-handoff-lab-submission.mp4")
+    concat([OUT / "intro-narrated.mp4", OUT / "demo-narrated.mp4", OUT / "outro-narrated.mp4"],
+           OUT / "hotel-handoff-lab-submission.mp4")
     print("FINAL:", OUT / "hotel-handoff-lab-submission.mp4")
 
 

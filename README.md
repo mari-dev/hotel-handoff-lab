@@ -3,6 +3,9 @@
 > **Status: not yet manually reviewed.** Written by an agent; awaiting human review.
 
 A local prototype for invoice requests that get lost between hotel shifts.
+Built during a hackathon sprint (Agents for Humans, September 2026), with AI
+coding assistance directed by the entrant's own prompts and hospitality
+experience — see [development and reuse disclosure](docs/submission-draft.md#development-and-reuse-disclosure).
 
 ## Run
 
@@ -27,6 +30,10 @@ Startup makes no model call. AI analysis uses paid Bedrock inference; the local
 ## Workflow
 
 Enter a guest name or ask Strands to extract an invoice request from a message.
+The message can be typed, pasted, or dictated: the Dictate button uses the
+browser's built-in speech recognition (no server call, no extra cost) to
+transcribe speech into the message field live. It appears only when the
+browser supports it and stays local to that browser tab.
 Every extracted field must quote the input; a person confirms creation.
 Prepare claims the request atomically and opens Lexware in a browser tab.
 The monitor reads actual PDFs from results/inbox/pdfs and exported sent EML

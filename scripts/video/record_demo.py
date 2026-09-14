@@ -129,6 +129,15 @@ with tempfile.TemporaryDirectory() as temp:
 
             click_at(page, page.locator("#new"))
             click_at(page, page.locator("#intake-box summary"))
+
+            dictate = page.locator("#dictate")
+            if dictate.is_visible():
+                click_at(page, dictate)
+                page.wait_for_timeout(900)
+                beat(page, "This message can be dictated too, with the browser's own speech recognition.", 1800)
+                click_at(page, dictate)
+                page.wait_for_timeout(300)
+
             message = "Anna Keller requests an invoice for 12-14 September. Company: Example GmbH. Address will follow."
             type_into(page, page.locator("#intake-message"), message, delay=18)
             beat(page, "Synthetic guest message. Strands extracts literal details; staff review before saving.", 3200)
